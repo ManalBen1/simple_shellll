@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+/**
+* main - The entry point of the program.
+* Return: 0 for success.
+*/
+
+int main(void)
+{
+int a = 1;
+int b = 2;
+int multi;
+multi = a * b;
+printf("The multiplication of a and b is", multi);
+
+return (0);
+}
