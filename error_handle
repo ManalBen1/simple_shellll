@@ -16,3 +16,23 @@ write_2_stder(strng[i]);
 i = i + 1;
 }
 }
+
+/**
+* write_2_stder - writes the character c to stderr
+* @character: The character to print
+* Return: if successful return 1 otherwise return -1, and error number is set.
+*/
+int write_2_stder(char character)
+{
+static int i;
+static char bufa[WRITE_BUF_SIZE];
+
+if (character == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+{
+write(2, bufa, i);
+i = 0;
+}
+if (c != BUF_FLUSH)
+bufa[i = i + 1] = character;
+return (1);
+}
