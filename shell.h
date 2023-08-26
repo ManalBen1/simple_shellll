@@ -12,7 +12,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-// defining preprocessors
+
 #define CMD_NORM	0
 #define CMD_OR		1
 #define CMD_AND		2
@@ -29,10 +29,10 @@
 extern char **environ;
 
 /**
- * struct liststr : singly linked list
- * @num: number field
- * @str: string
- * @next: pointer to next node
+ * struct liststr - Represents a singly linked list node.
+ * @num: Number field
+ * @str: String
+ * @next: Pointer to next node
  */
 
 typedef struct liststr
@@ -81,15 +81,21 @@ typedef struct pass_infor
 	list_t *env;
 	list_t *history;
 	list_t *alias;
-	char **cmd_buf; /* pointer to cmd, chain buffer, for memory mangement */
-	int cmd_buf_type; /* CMD_type ||, &&, ; */
-	int readfile_descr;
-	int histcount;
-} infor;
+	char **cmd_buf;
+/**
+* pointer to cmd, chain buffer, for memory mangement
+* CMD_type ||, &&, ;
+*/
+
+int cmd_buf_type;
+int readfile_descr;
+int histcount;
+}
+infor;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-	0, 0, 0}
+0, 0, 0}
 
 /**
  *struct builtin - contains builtin string & function
@@ -103,99 +109,95 @@ typedef struct builtin
 } builtin_table;
 
 
-//shell loop
+
 int hsh(infor *, char **);
 int find_builtin(infor *);
 void find_cmd(infor *);
 void fork_cmd(infor *);
 
-//parser.c
 int is_cmd(infor *, char *);
 char *dup_chars(char *, int, int);
 char *find_path(infor *, char *, char *);
 
-// loophsh.c 
+
 int loophsh(char **);
 
-// check errors.c 
+
 void print_input_string(char *);
 int write_char(char);
 int _putfile_descr(char c, int file_descr);
 int _putsfile_descr(char *str, int file_descr);
 
-// string.c
+
 int _strlen(char *);
 int _strcmp(char *, char *);
 char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
 
-// another string.c 
+
 char *_strcpy(char *, char *);
 char *_strdup(const char *);
 void _puts(char *);
 int _putchar(char);
 
-// exits.c 
+
 char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
 
-//okenizer.c
 char **strtow(char *, char *);
 char **strtow2(char *, char);
 
-//realloc.c 
+
 char *_memset(char *, char, unsigned int);
 void ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 
-// handling errors1.c
 int _erratoi(char *);
 void print_error(infor *, char *);
 int print_d(int, int);
 char *convert_number(long int, int, int);
 void remove_comments(char *);
-// taking care of the memory
-int bfree(void **);
 
-// converting to integer
+
+int bfree(void **);
 int interactive(infor *);
 int is_delim(char, char *);
 int _isalpha(int);
 int _atoi(char *);
 
-//the builtin.c
+
 int _myexit(infor *);
 int _mycd(infor *);
 int _myhelp(infor *);
 
-//builtin1.c 
+
 int _myhistory(infor *);
 int _myalias(infor *);
 
-//_getline.c
+
 ssize_t get_input(infor *);
 int _getline(infor *, char **, size_t *);
 void sigintHandler(int);
 
-//toem_getinfo.c 
+
 void clear_info(infor *);
 void set_info(infor *, char **);
 void free_info(infor *, int);
 
-// _environ.c 
+
 char *_getenv(infor *, const char *);
 int _myenv(infor *);
 int _mysetenv(infor *);
 int _myunsetenv(infor *);
 int populate_env_list(infor *);
 
-// _getenv.c
+
 char **get_environ(infor *);
 int _unsetenv(infor *, char *);
 int _setenv(infor *, char *, char *);
 
-// _history.c 
+
 char *get_history_file(infor *info);
 int write_history(infor *info);
 int read_history(infor *info);
@@ -207,7 +209,8 @@ char **list_to_strings(list_t *);
 size_t print_list(const list_t *);
 list_t *node_starts_with(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
-// _lists.c 
+
+
 list_t *add_node(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
 size_t print_list_str(const list_t *);

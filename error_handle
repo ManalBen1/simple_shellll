@@ -36,3 +36,40 @@ if (c != BUF_FLUSH)
 bufa[i = i + 1] = character;
 return (1);
 }
+
+/**
+* print_file_descr - writes the character c to given file_descr
+* @character: The character to print
+* @file_descr: The filedescriptor to write
+* Return: if successful return 1 otherwise return -1, and error number is set.
+*/
+int print_file_descr(char character, int file_descr)
+{
+static int i;
+static char bufa[WRITE_BUF_SIZE];
+if (character == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+{
+write(file_descr, bufa, i);
+i = 0;
+}
+if (character != BUF_FLUSH)
+bufa[i = i + 1] = character;
+return (1);
+}
+/**
+*print_input - will print input string
+* @strng: string to print
+* @file_descr: file descriptor to write
+* Return: number of characters
+*/
+int print_input(char *strng, int file_descr)
+{
+int input = 0;
+if (!strng)
+return (0);
+while (*strng)
+{
+input += print_input(*strng++, file_descr);
+}
+return (input);
+}
