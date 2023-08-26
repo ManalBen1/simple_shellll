@@ -1,5 +1,6 @@
 #include "shell.h"
-
+#include "shell.c"
+#include "main.c"
 /**
 *print_strings - prints an input string
 * @strng: the string to be printed
